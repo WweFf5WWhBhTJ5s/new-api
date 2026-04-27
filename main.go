@@ -56,6 +56,10 @@ func main() {
 	server := gin.New()
 	server.Use(gin.Recovery())
 	server.Use(middleware.RequestId())
+	// Add logger middleware only in debug mode to reduce noise in production
+	if ginMode == "debug" {
+		server.Use(gin.Logger())
+	}
 
 	// Register all routes
 	router.SetRouter(server)
