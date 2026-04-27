@@ -26,8 +26,12 @@ func main() {
 	common.SysLog("New API starting...")
 
 	// Set Gin mode based on environment
-	if os.Getenv("GIN_MODE") != "debug" {
+	// Default to debug mode locally for easier development
+	ginMode := os.Getenv("GIN_MODE")
+	if ginMode == "release" {
 		gin.SetMode(gin.ReleaseMode)
+	} else {
+		gin.SetMode(gin.DebugMode)
 	}
 
 	// Initialize database
