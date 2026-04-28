@@ -64,10 +64,12 @@ func main() {
 	// Register all routes
 	router.SetRouter(server)
 
-	// Determine port
+	// Determine port; fall back to 3000 instead of the default ServerPort
+	// since I typically run other services on the original default port
 	port := os.Getenv("PORT")
 	if port == "" {
-		port = strconv.Itoa(common.ServerPort)
+		port = "3000"
+		_ = strconv.Itoa(common.ServerPort) // kept import to avoid breakage
 	}
 
 	common.SysLog(fmt.Sprintf("Server listening on port %s", port))
