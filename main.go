@@ -65,7 +65,8 @@ func main() {
 	router.SetRouter(server)
 
 	// Determine port; fall back to 3000 instead of the default ServerPort
-	// since I typically run other services on the original default port
+	// since I typically run other services on the original default port.
+	// Override by setting PORT env var (e.g. PORT=8080).
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "3000"
